@@ -1,0 +1,21 @@
+.loginPage {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.loginPage__title {
+	margin-bottom: 3rem;
+}
+
+.loginForm__input,
+.loginForm__button,
+.loginPage__error {
+	width: 100%;
+}
+
+.loginForm__input {
+	margin-bottom: 2rem;
+}

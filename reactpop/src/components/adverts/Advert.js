@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import T from 'prop-types';
 
 import './Advert.css';
-import AdvertsPage from './AdvertsPage';
 
 const Advert = ({ className, photo, name, sale, price, tags }) => (
 	<div className={classNames('advert', className)}>

@@ -6,6 +6,29 @@ const client = axios.create({
 	baseURL,
 });
 
-client.interceptors.response.use((res) => res.data);
+const baseApiUrl = '/apiv1';
+
+const setAuthorizationHeader = (token) => {
+	client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+};
+
+client.login = (credentials) =>
+	client.post(`${baseApiUrl}/auth/login`, credentials).then((auth) => {
+		setAuthorizationHeader(auth.token);
+		return auth;
+	});
+
+client.interceptors.response.use(
+	(res) => res.data,
+	(error) => {
+		if (!error.response) {
+			return Promise.reject({ message: error.message });
+		}
+		return Promise.reject({
+			message: error.response.statusText,
+			...error.response.data,
+		});
+	},
+);
 
 export default client;
