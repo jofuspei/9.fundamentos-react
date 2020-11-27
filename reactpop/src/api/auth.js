@@ -1,4 +1,13 @@
 import client from './client';
 
-export const login = (credentials) =>
-	client.login(credentials).then((auth) => auth);
+import storage from '../utils/storage';
+
+export const login = (credentials) => {
+	const { remember, ...creds } = credentials;
+	return client.login(creds).then((auth) => {
+		if (remember && auth.ok) {
+			storage.set('auth', auth);
+		}
+		return auth;
+	});
+};

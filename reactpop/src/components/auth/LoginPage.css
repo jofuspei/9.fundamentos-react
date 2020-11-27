@@ -16,6 +16,7 @@
 	width: 100%;
 }
 
-.loginForm__input {
+.loginForm__input,
+.loginForm__checkbox {
 	margin-bottom: 2rem;
 }

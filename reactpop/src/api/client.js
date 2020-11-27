@@ -31,4 +31,10 @@ client.interceptors.response.use(
 	},
 );
 
+export const configureClient = (token) => {
+	if (token) {
+		setAuthorizationHeader(token);
+	}
+};
+
 export default client;

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Input, Button, Message } from 'semantic-ui-react';
+import T from 'prop-types';
+import { Input, Checkbox, Button, Message } from 'semantic-ui-react';
 import { login } from '../../api/auth';
 
 import './LoginPage.css';
@@ -9,19 +10,24 @@ class LoginPage extends React.Component {
 		form: {
 			email: '',
 			password: '',
+			remember: false,
 		},
 		loading: false,
 		error: null,
 	};
 
-	handleChange = (ev) => {
+	handleChange = (ev, data) => {
 		this.setState((state) => ({
-			form: { ...state.form, [ev.target.name]: ev.target.value },
+			form: {
+				...state.form,
+				[data.name]: data.value || data.checked,
+			},
 			error: null,
 		}));
 	};
 
-	handleLogin = async (ev) => {
+	handleSubmit = async (ev) => {
+		const { onLogin } = this.props;
 		const { form: credentials } = this.state;
 		ev.preventDefault();
 		this.setState({ loading: true });
@@ -31,7 +37,8 @@ class LoginPage extends React.Component {
 			setTimeout(() => {
 				// Simulate some loading time
 				this.setState({ loading: false, error });
-			}, 1500);
+				onLogin(result.ok);
+			}, 1000);
 		} catch (error) {
 			this.setState({ loading: false, error });
 		}
@@ -48,7 +55,7 @@ class LoginPage extends React.Component {
 
 	render() {
 		const {
-			form: { email, password },
+			form: { email, password, remember },
 			loading,
 			error,
 		} = this.state;
@@ -56,7 +63,7 @@ class LoginPage extends React.Component {
 		return (
 			<div className="loginPage">
 				<h1 className="loginPage__title">Login</h1>
-				<form onSubmit={this.handleLogin}>
+				<form onSubmit={this.handleSubmit}>
 					<Input
 						name="email"
 						type="text"
@@ -79,6 +86,14 @@ class LoginPage extends React.Component {
 						placeholder="password"
 					/>
 
+					<Checkbox
+						name="remember"
+						checked={remember}
+						className="loginForm__checkbox"
+						onChange={this.handleChange}
+						label="Remember me"
+					/>
+
 					<Button
 						type="submit"
 						className="loginForm__button"
@@ -99,5 +114,9 @@ class LoginPage extends React.Component {
 		);
 	}
 }
+
+LoginPage.propTypes = {
+	onLogin: T.func.isRequired,
+};
 
 export default LoginPage;
