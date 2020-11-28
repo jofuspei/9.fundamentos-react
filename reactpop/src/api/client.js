@@ -12,11 +12,22 @@ const setAuthorizationHeader = (token) => {
 	client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
 
+const removeAuthorizationHeader = () => {
+	delete client.defaults.headers.common['Authorization'];
+};
+
 client.login = (credentials) =>
 	client.post(`${baseApiUrl}/auth/login`, credentials).then((auth) => {
 		setAuthorizationHeader(auth.token);
 		return auth;
 	});
+
+client.logout = () => {
+	return new Promise((resolve) => {
+		removeAuthorizationHeader();
+		resolve();
+	});
+};
 
 client.interceptors.response.use(
 	(res) => res.data,

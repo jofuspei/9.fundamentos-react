@@ -27,7 +27,7 @@ class LoginPage extends React.Component {
 	};
 
 	handleSubmit = async (ev) => {
-		const { onLogin } = this.props;
+		const { onLogin, history } = this.props;
 		const { form: credentials } = this.state;
 		ev.preventDefault();
 		this.setState({ loading: true });
@@ -37,7 +37,9 @@ class LoginPage extends React.Component {
 			setTimeout(() => {
 				// Simulate some loading time
 				this.setState({ loading: false, error });
-				onLogin(result.ok);
+				onLogin(result.ok, () => {
+					history.push('/adverts');
+				});
 			}, 1000);
 		} catch (error) {
 			this.setState({ loading: false, error });

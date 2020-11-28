@@ -20,18 +20,21 @@ class AdvertsPage extends React.Component {
 	}
 
 	renderContent() {
+		const { history } = this.props;
 		const { adds } = this.state;
 
 		if (!adds) {
 			return null;
 		}
 
-		return adds.map((add) => <Advert {...add} key={add._id} />);
+		return adds.map((add) => (
+			<Advert {...add} key={add._id} history={history} />
+		));
 	}
 
 	render() {
 		return (
-			<Layout title="Adverts">
+			<Layout title="Adverts" {...this.props}>
 				<div className="advertsPage">{this.renderContent()}</div>
 			</Layout>
 		);

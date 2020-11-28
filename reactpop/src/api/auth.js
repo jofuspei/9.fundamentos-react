@@ -11,3 +11,9 @@ export const login = (credentials) => {
 		return auth;
 	});
 };
+
+export const logout = () => {
+	return client.logout().then(() => {
+		storage.remove('auth');
+	});
+};

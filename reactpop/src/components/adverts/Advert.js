@@ -4,8 +4,20 @@ import T from 'prop-types';
 
 import './Advert.css';
 
-const Advert = ({ className, photo, name, sale, price, tags }) => (
-	<div className={classNames('advert', className)}>
+const Advert = ({
+	className,
+	photo,
+	name,
+	sale,
+	price,
+	tags,
+	history,
+	_id,
+}) => (
+	<div
+		className={classNames('advert', className)}
+		onClick={() => history.push(`/advert/${_id}`)}
+	>
 		<div>
 			<img src={photo} alt={name} />
 		</div>
@@ -27,6 +39,7 @@ const Advert = ({ className, photo, name, sale, price, tags }) => (
 );
 
 Advert.propTypes = {
+	_id: T.string.isRequired,
 	className: T.string,
 	photo: T.string,
 	name: T.string.isRequired,
