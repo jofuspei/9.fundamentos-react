@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import T from 'prop-types';
 
 import './Advert.css';
 
@@ -37,15 +36,5 @@ const Advert = ({
 		</div>
 	</div>
 );
-
-Advert.propTypes = {
-	_id: T.string.isRequired,
-	className: T.string,
-	photo: T.string,
-	name: T.string.isRequired,
-	sale: T.bool,
-	price: T.number,
-	tags: T.array,
-};
 
 export default Advert;

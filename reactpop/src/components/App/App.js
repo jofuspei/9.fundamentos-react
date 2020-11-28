@@ -2,6 +2,8 @@ import React from 'react';
 import T from 'prop-types';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import { AuthContext } from '../contexts/AuthContext';
+
 import AdvertsPage from '../adverts/AdvertsPage';
 import LoginPage from '../auth/LoginPage';
 import AdvertDetailPage from '../adverts/AdvertDetailPage';
@@ -19,42 +21,43 @@ class App extends React.Component {
 	render() {
 		const { logged } = this.state;
 		return (
-			<div className="App">
-				<Switch>
-					<ProtectedRoute logged={logged} path="/" exact>
-						<Redirect to="/adverts" />
-					</ProtectedRoute>
-					<ProtectedRoute logged={logged} path="/adverts" exact>
-						{({ history }) => (
-							<AdvertsPage
-								history={history}
-								isLogged={logged}
-								onLogout={this.handleLogout}
-							/>
-						)}
-					</ProtectedRoute>
-					<ProtectedRoute logged={logged} path="/advert/new" exact>
-						<NewAdvertPage></NewAdvertPage>
-					</ProtectedRoute>
-					<ProtectedRoute
-						logged={logged}
-						path="/advert/:id"
-						exact
-						component={AdvertDetailPage}
-					></ProtectedRoute>
-					<Route path="/login" exact>
-						{({ history }) => (
-							<LoginPage onLogin={this.handleLogin} history={history} />
-						)}
-					</Route>
-					<ProtectedRoute logged={logged} path="/404" exact>
-						404
-					</ProtectedRoute>
-					<ProtectedRoute logged={logged}>
-						<Redirect to="/404" />
-					</ProtectedRoute>
-				</Switch>
-			</div>
+			<AuthContext.Provider
+				value={{
+					logged,
+					onLogin: this.handleLogin,
+					onLogout: this.handleLogout,
+				}}
+			>
+				<div className="App">
+					<Switch>
+						<ProtectedRoute path="/" exact>
+							<Redirect to="/adverts" />
+						</ProtectedRoute>
+						<ProtectedRoute path="/adverts" exact>
+							{({ history }) => <AdvertsPage history={history} />}
+						</ProtectedRoute>
+						<ProtectedRoute path="/advert/new" exact>
+							<NewAdvertPage></NewAdvertPage>
+						</ProtectedRoute>
+						<ProtectedRoute
+							path="/advert/:id"
+							exact
+							component={AdvertDetailPage}
+						></ProtectedRoute>
+						<Route path="/login" exact>
+							{({ history }) => (
+								<LoginPage onLogin={this.handleLogin} history={history} />
+							)}
+						</Route>
+						<ProtectedRoute path="/404" exact>
+							404
+						</ProtectedRoute>
+						<ProtectedRoute>
+							<Redirect to="/404" />
+						</ProtectedRoute>
+					</Switch>
+				</div>
+			</AuthContext.Provider>
 
 			// <div className="App">
 			// 	{logged ? <AdvertsPage /> : <LoginPage onLogin={this.handleLogin} />}

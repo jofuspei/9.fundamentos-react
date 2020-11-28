@@ -1,0 +1,13 @@
+.layout main {
+	padding: 3rem 0;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.layout footer {
+	text-align: center;
+	padding: 1rem 4rem;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+}

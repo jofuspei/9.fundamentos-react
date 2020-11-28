@@ -1,30 +1,46 @@
 import React from 'react';
 import T from 'prop-types';
-import { Button } from 'semantic-ui-react';
-
 import classNames from 'classnames';
+
 import { Link } from 'react-router-dom';
+import { Button, Icon } from 'semantic-ui-react';
 
 import { logout } from '../../api/auth';
+import { AuthContext } from '../contexts/AuthContext';
 
-const Header = ({ className, onLogout, isLogged }) => (
+import './Header.css';
+
+const Header = ({ className, onLogout }) => (
 	<header className={classNames('header', className)}>
 		<Link to="/">
-			<div className="header--logo">Logo</div>
+			<div className="header__logo">
+				<Icon circular inverted color="blue" size="big" name="dollar" />
+				<h1>Nodepop</h1>
+			</div>
 		</Link>
-		<nav className="header--nav">
-			<Link to="/advert/new">New advert</Link>
-			{isLogged ? (
-				<Button onClick={() => logout().then(onLogout)}>Logout</Button>
-			) : (
-				<Link to="/login">Login</Link>
-			)}
+		<nav className="header__nav">
+			<React.Fragment>
+				<Link to="/advert/new">
+					<Button primary>New product</Button>
+				</Link>
+				<Button basic color="red" onClick={() => logout().then(onLogout)}>
+					Logout
+				</Button>
+			</React.Fragment>
 		</nav>
 	</header>
 );
 
 Header.propTypes = {
 	className: T.string,
+	onLogout: T.func,
+	logged: T.bool,
 };
 
-export default Header;
+const AuthHeader = (props) => (
+	<AuthContext.Consumer>
+		{(value) => <Header {...props} {...value} />}
+	</AuthContext.Consumer>
+);
+
+export default AuthHeader;

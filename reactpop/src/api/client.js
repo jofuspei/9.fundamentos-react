@@ -18,6 +18,9 @@ const removeAuthorizationHeader = () => {
 
 client.login = (credentials) =>
 	client.post(`${baseApiUrl}/auth/login`, credentials).then((auth) => {
+		if (auth.error) {
+			throw new Error(auth.error);
+		}
 		setAuthorizationHeader(auth.token);
 		return auth;
 	});
