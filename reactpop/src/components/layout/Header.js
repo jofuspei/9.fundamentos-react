@@ -11,7 +11,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import './Header.css';
 
 const Header = ({ className, onLogout }) => (
-	<header className={classNames('header', className)}>
+	<header className={classNames('header__container', className)}>
 		<Link to="/">
 			<div className="header__logo">
 				<Icon circular inverted color="blue" size="big" name="dollar" />

@@ -1,0 +1,15 @@
+.notFoundPage__container {
+	text-align: center;
+}
+
+.notFoundPage__text {
+	margin-bottom: 5rem;
+}
+
+.notFoundPage__text h1 {
+	font-size: 12rem;
+}
+
+.notFoundPage__text h3 {
+	font-size: 3rem;
+}

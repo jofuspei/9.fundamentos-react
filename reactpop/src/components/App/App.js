@@ -9,6 +9,7 @@ import LoginPage from '../auth/LoginPage';
 import AdvertDetailPage from '../adverts/AdvertDetailPage';
 import NewAdvertPage from '../adverts/NewAdvertPage';
 import ProtectedRoute from '../auth/ProtectedRoute';
+import NotFoundPage from '../shared/NotFoundPage';
 
 class App extends React.Component {
 	state = {
@@ -50,7 +51,7 @@ class App extends React.Component {
 							)}
 						</Route>
 						<ProtectedRoute path="/404" exact>
-							404
+							<NotFoundPage />
 						</ProtectedRoute>
 						<ProtectedRoute>
 							<Redirect to="/404" />
@@ -58,10 +59,6 @@ class App extends React.Component {
 					</Switch>
 				</div>
 			</AuthContext.Provider>
-
-			// <div className="App">
-			// 	{logged ? <AdvertsPage /> : <LoginPage onLogin={this.handleLogin} />}
-			// </div>
 		);
 	}
 }

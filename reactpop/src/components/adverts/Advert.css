@@ -1,4 +1,37 @@
 .advert {
-	color: darkcyan;
 	padding: 2rem 1rem;
+	display: flex;
+	border: 1px solid rgb(179, 198, 228);
+	border-radius: 0.5rem;
+	margin: 1rem 0;
+	cursor: pointer;
+}
+
+.advert:hover {
+	background-color: rgb(179, 198, 228);
+}
+
+.advert__photo img {
+	border-radius: 0.25rem;
+	height: 120px;
+	margin: 0 2rem;
+}
+
+.advert__content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.advert__price {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.advert__sell {
+	color: #db2828;
+}
+
+.advert__buy {
+	color: #16ab39;
 }
