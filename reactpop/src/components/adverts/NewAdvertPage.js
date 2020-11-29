@@ -37,15 +37,12 @@ class NewAdvertPage extends React.Component {
 
 	handleSubmit = async (ev) => {
 		const {
-			product: {
-				name: nombre,
-				selling: venta,
-				tags,
-				price: precio,
-				photo: foto,
-			},
+			product: { name, selling, tags, price, photo },
 		} = this.state;
-		const addInfo = { nombre, venta, tags, precio, foto };
+		const { history } = this.props;
+		const sale = selling === 'buy' ? false : true;
+		const addInfo = { name, sale, tags, price, photo };
+
 		ev.preventDefault();
 		this.setState({ loading: true });
 		try {
@@ -58,8 +55,8 @@ class NewAdvertPage extends React.Component {
 					this.setState({ success: true });
 					setTimeout(() => {
 						this.setState({ success: false });
-						// ToDo: Investigar como resetear el form
-					}, 3000);
+						history.push('/adverts');
+					}, 1000);
 				}
 			}, 1000);
 		} catch (error) {

@@ -1,0 +1,36 @@
+.advertDetail {
+	width: 75%;
+	margin: 0 auto;
+}
+
+.advertDetail__photo img {
+	width: 100%;
+}
+
+.advertDetail__name {
+	font-size: 2rem;
+	line-height: 4rem;
+}
+
+.advertDetail__content {
+	margin: 2rem 0 5rem 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.advertDetail__price,
+.advertDetail__sale {
+	font-size: 3rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-left: 2rem;
+}
+
+.advertDetail__buy {
+	color: #16ab39;
+}
+
+.advertDetail__sell {
+	color: #db2828;
+}

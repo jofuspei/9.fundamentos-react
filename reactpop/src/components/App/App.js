@@ -38,7 +38,7 @@ class App extends React.Component {
 							{({ history }) => <AdvertsPage history={history} />}
 						</ProtectedRoute>
 						<ProtectedRoute path="/advert/new" exact>
-							<NewAdvertPage></NewAdvertPage>
+							{({ history }) => <NewAdvertPage history={history} />}
 						</ProtectedRoute>
 						<ProtectedRoute
 							path="/advert/:id"

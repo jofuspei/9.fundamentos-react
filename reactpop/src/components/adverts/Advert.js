@@ -40,34 +40,11 @@ const Advert = ({
 			</Item.Description>
 			<Item.Extra>
 				{tags.map((tag) => (
-					<Label key={tag}>{tag}</Label>
+					<Label key={`${_id}__${tag}`}>{tag}</Label>
 				))}
 			</Item.Extra>
 		</Item.Content>
 	</Item>
-
-	// <div
-	// 	className={classNames('advert', className)}
-	// 	onClick={() => history.push(`/advert/${_id}`)}
-	// >
-	// 	<div>
-	// 		<img src={photo} alt={name} />
-	// 	</div>
-	// 	<div>
-	// 		<span>{name}</span>
-	// 	</div>
-	// 	{tags && (
-	// 		<div>
-	// 			{tags.map((tag) => (
-	// 				<span key={tag}>{tag}</span>
-	// 			))}
-	// 		</div>
-	// 	)}
-	// 	<div>
-	// 		<span>{sale ? 'SALE' : 'BUY'}</span>
-	// 		<span>{price}</span>
-	// 	</div>
-	// </div>
 );
 
 export default Advert;

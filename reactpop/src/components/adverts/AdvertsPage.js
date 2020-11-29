@@ -23,8 +23,12 @@ class AdvertsPage extends React.Component {
 		const { history } = this.props;
 		const { adds } = this.state;
 
-		if (!adds) {
-			return null;
+		if (!adds?.length) {
+			return (
+				<div>
+					<h3>No adds were found</h3>
+				</div>
+			);
 		}
 
 		return adds.map((add) => (

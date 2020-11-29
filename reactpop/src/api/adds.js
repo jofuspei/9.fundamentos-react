@@ -21,3 +21,8 @@ export const newAdvert = (addInfo) => {
 	const url = `${baseApiUrl}/adverts`;
 	return client.post(url, addInfo);
 };
+
+export const deleteAdvert = (addId) => {
+	const url = `${baseApiUrl}/adverts/${addId}`;
+	return client.delete(url);
+};
