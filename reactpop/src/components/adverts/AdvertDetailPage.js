@@ -56,7 +56,7 @@ class AdvertDetailPage extends React.Component {
 		}
 
 		const {
-			result: { _id, name, sale, price, tags },
+			result: { _id, name, sale, price, tags, photo },
 		} = add;
 
 		return (
@@ -64,7 +64,11 @@ class AdvertDetailPage extends React.Component {
 				<Item.Header className="advertDetail__name">{name}</Item.Header>
 				<Item.Image
 					className="advertDetail__photo"
-					src="https://react.semantic-ui.com/images/wireframe/image.png"
+					src={
+						photo
+							? `${process.env.REACT_APP_API_BASE_URL}${photo}`
+							: 'https://react.semantic-ui.com/images/wireframe/image.png'
+					}
 				/>
 				<Item.Content className="advertDetail__content">
 					<div>

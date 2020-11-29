@@ -20,7 +20,11 @@ const Advert = ({
 	>
 		<Item.Image
 			className="advert__photo"
-			src="https://react.semantic-ui.com/images/wireframe/image.png"
+			src={
+				photo
+					? `${process.env.REACT_APP_API_BASE_URL}${photo}`
+					: 'https://react.semantic-ui.com/images/wireframe/image.png'
+			}
 		/>
 
 		<Item.Content className="advert__content">
