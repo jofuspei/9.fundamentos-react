@@ -8,6 +8,7 @@
 	justify-content: space-between;
 	align-items: center;
 	box-shadow: 0 0 24px rgb(179, 198, 228);
+	z-index: 999;
 }
 
 .header__logo {

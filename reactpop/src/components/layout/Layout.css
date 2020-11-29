@@ -16,4 +16,5 @@
 	position: fixed;
 	bottom: 0;
 	border-top: 1px solid rgb(179, 198, 228);
+	z-index: 999;
 }

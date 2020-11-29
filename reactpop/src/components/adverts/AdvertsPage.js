@@ -2,6 +2,8 @@ import React from 'react';
 
 import Layout from '../layout/Layout';
 import Advert from './Advert';
+import AdvertFilter from './AdvertFilter';
+import { Divider } from 'semantic-ui-react';
 
 import { getAdds } from '../../api/adds';
 
@@ -39,7 +41,11 @@ class AdvertsPage extends React.Component {
 	render() {
 		return (
 			<Layout title="Adverts" {...this.props}>
-				<div className="advertsPage">{this.renderContent()}</div>
+				<div className="advertsPage__filter">
+					<AdvertFilter />
+				</div>
+				<Divider />
+				<div className="advertsPage__content">{this.renderContent()}</div>
 			</Layout>
 		);
 	}
