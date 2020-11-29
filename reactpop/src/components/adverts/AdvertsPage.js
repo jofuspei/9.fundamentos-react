@@ -5,11 +5,12 @@ import Advert from './Advert';
 import AdvertFilter from './AdvertFilter';
 import { Divider } from 'semantic-ui-react';
 
-import { getAdds } from '../../api/adds';
+import { getAdds, getFilteredAdds } from '../../api/adds';
 
 class AdvertsPage extends React.Component {
 	state = {
 		adds: null,
+		filters: null,
 	};
 
 	componentDidMount() {
@@ -20,6 +21,34 @@ class AdvertsPage extends React.Component {
 		const result = await getAdds();
 		this.setState({ adds: result.result.rows });
 	}
+
+	async getFilteredAdvertsData() {
+		const {
+			filters: { name, sale, price, tags },
+		} = this.state;
+		const query = {};
+		if (name) {
+			query.name = name;
+		}
+		if (sale === 'sell') {
+			query.sale = true;
+		} else if (sale === 'buy') {
+			query.sale = false;
+		}
+		query.price = `${price.low}-${price.up}`;
+		if (tags.length) {
+			query.tags = tags;
+		}
+
+		const result = await getFilteredAdds(query);
+		this.setState({ adds: result.result.rows });
+	}
+
+	updateFilters = (filters) => {
+		this.setState({ filters }, () => {
+			this.getFilteredAdvertsData();
+		});
+	};
 
 	renderContent() {
 		const { history } = this.props;
@@ -39,10 +68,11 @@ class AdvertsPage extends React.Component {
 	}
 
 	render() {
+		const { filters } = this.state;
 		return (
 			<Layout title="Adverts" {...this.props}>
 				<div className="advertsPage__filter">
-					<AdvertFilter />
+					<AdvertFilter updateFilters={this.updateFilters} />
 				</div>
 				<Divider />
 				<div className="advertsPage__content">{this.renderContent()}</div>

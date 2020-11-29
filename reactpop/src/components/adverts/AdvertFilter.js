@@ -45,6 +45,7 @@ class AdvertFilter extends React.Component {
 
 	handleFilterSubmit = () => {
 		const { name, sale, price, tags } = this.state;
+		this.props.updateFilters({ name, sale, price, tags });
 	};
 
 	render() {
